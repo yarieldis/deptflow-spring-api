@@ -53,7 +53,13 @@ Run a single test class:
 ./mvnw -pl api -am test -Dtest=PostgresIntegrationTest
 ```
 
-The suite is 25 tests + 1 disabled generator: domain unit tests, application policy tests, H2 persistence/workflow integration tests, an API smoke test, and Testcontainers tests against real PostgreSQL and SQL Server.
+The suite is 25 tests: domain unit tests, application policy tests, H2 persistence/workflow integration tests, an API smoke test, and Testcontainers tests against real PostgreSQL and SQL Server.
+
+**Regenerate the Flyway baseline migrations** (from `META-INF/orm.xml`; only while the schema is greenfield):
+
+```bash
+./mvnw -pl infrastructure -am -Pgenerate-schema process-test-classes
+```
 
 ## Running
 

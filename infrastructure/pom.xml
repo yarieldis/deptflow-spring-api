@@ -82,4 +82,38 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>generate-schema</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.6.3</version>
+                        <executions>
+                            <execution>
+                                <id>generate-schema</id>
+                                <phase>process-test-classes</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <mainClass>com.deptflow.infrastructure.SchemaGenerator</mainClass>
+                                    <classpathScope>test</classpathScope>
+                                    <systemProperties>
+                                        <systemProperty>
+                                            <key>schema.baseDir</key>
+                                            <value>${project.basedir}</value>
+                                        </systemProperty>
+                                    </systemProperties>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

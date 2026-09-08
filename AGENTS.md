@@ -71,17 +71,19 @@ deptflow-spring-api/
 
 ## Migrations
 
-Migrations are Flyway SQL scripts, split per provider under Infrastructure:
+Migrations are Flyway SQL scripts under Infrastructure, split per provider:
 
-- `db/migration/sqlite/` — SQLite migrations (default dev provider)
+- `db/migration/postgresql/` — PostgreSQL migrations
 - `db/migration/sqlserver/` — SQL Server migrations
-- `db/migration/postgres/` — PostgreSQL migrations
+- SQLite (dev) uses Hibernate `ddl-auto: create` — Flyway OSS has no SQLite module.
 
-In development, Flyway applies automatically on application startup against the configured datasource. To run manually:
+Flyway applies automatically on startup for the Postgres/SQL Server profiles. The baseline `V1__init.sql` files are generated from `META-INF/orm.xml` (not hand-written); regenerate them with:
 
 ```bash
-./mvnw -pl api spring-boot:run            # applies migrations then starts the app
+./mvnw -pl infrastructure -am -Pgenerate-schema process-test-classes
 ```
+
+Only regenerate while the schema is greenfield — modifying an applied migration breaks Flyway's checksum validation. Post-release changes go into `V2__...`, `V3__...` scripts.
 
 ## Quick Start
 
