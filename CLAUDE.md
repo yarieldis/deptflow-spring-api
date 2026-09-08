@@ -33,7 +33,7 @@ api  →  application  →  domain  ←  infrastructure
 
 - **Persistence-ignorant domain**: one set of POJOs; Hibernate maps them via `META-INF/orm.xml` (field access) from Infrastructure — no `jakarta.persistence` imports in `domain`.
 - **Person ≠ login**: `Person` is linked to `UserAccount` only through a nullable `userId`; the domain stays free of security concerns.
-- **Multi-tenancy**: shared schema; tenant-owned entities carry `institution_id`, enforced with Hibernate discriminator multi-tenancy (`@TenantId`) which filters reads **and** stamps tenant ids on writes.
+- **Multi-tenancy**: shared schema; tenant-owned entities carry `institution_id`; isolation is enforced at the repository layer via a `CurrentTenantProvider` (tenant-scoped queries) and tenant-stamped writes.
 - **Department-scoped document access**: derived from active membership in the document's owning department; no per-document ACL tables.
 - **Always-versioned documents**: `Document` (metadata/summary status) + `DocumentVersion` (immutable file facts).
 - **Backend-agnostic storage**: files referenced by an opaque `storage_key` behind a `StorageService`.
@@ -66,8 +66,7 @@ deptflow-spring-api/
 ├── application/           # use cases, ports, DTOs
 ├── infrastructure/        # JPA orm.xml, repositories, Flyway scripts, storage provider
 ├── api/                   # REST controllers, security config, DI wiring
-├── openspec/              # OpenSpec specs and change proposals
-└── tests/                 # unit + integration tests (JUnit 5, Testcontainers)
+└── openspec/              # OpenSpec specs and change proposals (local-only, gitignored)
 ```
 
 ## Migrations
@@ -116,7 +115,7 @@ The active change is `migrate-to-spring-boot`. Use `openspec status --change "<n
 
 ## Testing
 
-Test project `tests/` (JUnit 5 + AssertJ + Mockito) covers unit tests (hierarchy cycle detection, membership active/ended logic, approval state machine) and integration tests (tenant isolation, unique-constraint rejections, department-scoped document access, filesystem storage, full approval workflow) via `@DataJpaTest`/`@SpringBootTest` and Testcontainers for Postgres/SQL Server.
+Tests live in each module's `src/test` (JUnit 5 + AssertJ + Mockito). Unit tests cover hierarchy cycle detection, membership active/ended logic, and the approval state machine; integration tests cover tenant isolation, unique-constraint rejections, department-scoped document access, filesystem storage, and the full approval workflow via `@DataJpaTest`/`@SpringBootTest` and Testcontainers for Postgres/SQL Server.
 
 ## Version Control Guidelines
 

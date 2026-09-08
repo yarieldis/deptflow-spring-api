@@ -2,8 +2,6 @@
 
 Backend services for the **DeptFlow** department workflow application — institutions, departments, the people working in them, and the (versioned) documents those people use, exposed as a multi-tenant REST API.
 
-> **Status**: migrating from .NET 10 to **Java 25 + Spring Boot**. See `openspec/changes/migrate-to-spring-boot/` for the migration plan. The domain layer is complete; persistence, use cases, and the API are in progress.
-
 ## Stack
 
 - Java 25 (LTS), Spring Boot 4.1.x (Spring Framework 7)

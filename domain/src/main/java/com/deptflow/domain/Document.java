@@ -111,6 +111,7 @@ public class Document {
                 .orElse(0) + 1;
         DocumentVersion version = new DocumentVersion(next, storageKey, storageProvider, fileName,
                 contentType, sizeBytes, changeNote, createdByPersonId);
+        version.setDocument(this);
         versions.add(version);
         refreshSummaryStatus();
         touch();

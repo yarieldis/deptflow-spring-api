@@ -25,6 +25,7 @@ public class DocumentVersion {
     private Instant reviewedAt;
     private UUID reviewedByPersonId;
     private String reviewComment;
+    private Document document;
 
     /** For persistence tooling. */
     protected DocumentVersion() {
@@ -144,5 +145,13 @@ public class DocumentVersion {
         this.reviewedAt = Instant.now();
         this.reviewedByPersonId = byPersonId;
         this.reviewComment = comment.trim();
+    }
+
+    Document getDocument() {
+        return document;
+    }
+
+    void setDocument(Document document) {
+        this.document = document;
     }
 }

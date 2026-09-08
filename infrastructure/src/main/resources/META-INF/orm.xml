@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_2.xsd"
+                 version="3.2">
+    <description>DeptFlow domain entity mappings (persistence-ignorant domain; field access)</description>
+
+    <!-- ============ Institution ============ -->
+    <entity class="com.deptflow.domain.Institution" access="FIELD">
+        <table name="institutions">
+            <unique-constraint>
+                <column-name>code</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="parentInstitutionId">
+                <column name="parent_institution_id"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="code">
+                <column name="code" nullable="false"/>
+            </basic>
+            <basic name="active">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ Department ============ -->
+    <entity class="com.deptflow.domain.Department" access="FIELD">
+        <table name="departments">
+            <unique-constraint>
+                <column-name>institution_id</column-name>
+                <column-name>code</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="institutionId">
+                <column name="institution_id" nullable="false"/>
+            </basic>
+            <basic name="parentDepartmentId">
+                <column name="parent_department_id"/>
+            </basic>
+            <basic name="headPersonId">
+                <column name="head_person_id"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="code">
+                <column name="code" nullable="false"/>
+            </basic>
+            <basic name="active">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ Role ============ -->
+    <entity class="com.deptflow.domain.Role" access="FIELD">
+        <table name="roles">
+            <unique-constraint>
+                <column-name>institution_id</column-name>
+                <column-name>name</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="institutionId">
+                <column name="institution_id" nullable="false"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="description">
+                <column name="description"/>
+            </basic>
+            <basic name="active">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="canApproveDocuments">
+                <column name="can_approve_documents" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ Person ============ -->
+    <entity class="com.deptflow.domain.Person" access="FIELD">
+        <table name="persons"/>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="institutionId">
+                <column name="institution_id" nullable="false"/>
+            </basic>
+            <basic name="userId">
+                <column name="user_id"/>
+            </basic>
+            <basic name="firstName">
+                <column name="first_name" nullable="false"/>
+            </basic>
+            <basic name="lastName">
+                <column name="last_name" nullable="false"/>
+            </basic>
+            <basic name="email">
+                <column name="email"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone"/>
+            </basic>
+            <basic name="jobTitle">
+                <column name="job_title"/>
+            </basic>
+            <basic name="active">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ PersonDepartment ============ -->
+    <entity class="com.deptflow.domain.PersonDepartment" access="FIELD">
+        <table name="person_departments">
+            <unique-constraint>
+                <column-name>person_id</column-name>
+                <column-name>department_id</column-name>
+                <column-name>start_date</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="personId">
+                <column name="person_id" nullable="false"/>
+            </basic>
+            <basic name="departmentId">
+                <column name="department_id" nullable="false"/>
+            </basic>
+            <basic name="roleId">
+                <column name="role_id" nullable="false"/>
+            </basic>
+            <basic name="primary">
+                <column name="is_primary" nullable="false"/>
+            </basic>
+            <basic name="startDate">
+                <column name="start_date" nullable="false"/>
+            </basic>
+            <basic name="endDate">
+                <column name="end_date"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ Document ============ -->
+    <entity class="com.deptflow.domain.Document" access="FIELD">
+        <table name="documents"/>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="institutionId">
+                <column name="institution_id" nullable="false"/>
+            </basic>
+            <basic name="departmentId">
+                <column name="department_id" nullable="false"/>
+            </basic>
+            <basic name="documentTypeId">
+                <column name="document_type_id"/>
+            </basic>
+            <basic name="title">
+                <column name="title" nullable="false"/>
+            </basic>
+            <basic name="description">
+                <column name="description"/>
+            </basic>
+            <basic name="status">
+                <column name="status" nullable="false"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="createdByPersonId">
+                <column name="created_by_person_id"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+            <one-to-many name="versions" mapped-by="document" orphan-removal="true">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+                <order-by>version_number</order-by>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+    <!-- ============ DocumentVersion ============ -->
+    <entity class="com.deptflow.domain.DocumentVersion" access="FIELD">
+        <table name="document_versions">
+            <unique-constraint>
+                <column-name>document_id</column-name>
+                <column-name>version_number</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <many-to-one name="document" optional="false">
+                <join-column name="document_id" nullable="false"/>
+            </many-to-one>
+            <basic name="versionNumber">
+                <column name="version_number" nullable="false"/>
+            </basic>
+            <basic name="storageKey">
+                <column name="storage_key" nullable="false"/>
+            </basic>
+            <basic name="storageProvider">
+                <column name="storage_provider"/>
+            </basic>
+            <basic name="fileName">
+                <column name="file_name" nullable="false"/>
+            </basic>
+            <basic name="contentType">
+                <column name="content_type" nullable="false"/>
+            </basic>
+            <basic name="sizeBytes">
+                <column name="size_bytes" nullable="false"/>
+            </basic>
+            <basic name="changeNote">
+                <column name="change_note"/>
+            </basic>
+            <basic name="createdByPersonId">
+                <column name="created_by_person_id"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="status">
+                <column name="status" nullable="false"/>
+                <enumerated>STRING</enumerated>
+            </basic>
+            <basic name="submittedAt">
+                <column name="submitted_at"/>
+            </basic>
+            <basic name="submittedByPersonId">
+                <column name="submitted_by_person_id"/>
+            </basic>
+            <basic name="reviewedAt">
+                <column name="reviewed_at"/>
+            </basic>
+            <basic name="reviewedByPersonId">
+                <column name="reviewed_by_person_id"/>
+            </basic>
+            <basic name="reviewComment">
+                <column name="review_comment"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ DocumentType ============ -->
+    <entity class="com.deptflow.domain.DocumentType" access="FIELD">
+        <table name="document_types"/>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="institutionId">
+                <column name="institution_id" nullable="false"/>
+            </basic>
+            <basic name="name">
+                <column name="name" nullable="false"/>
+            </basic>
+            <basic name="description">
+                <column name="description"/>
+            </basic>
+            <basic name="active">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ============ UserAccount ============ -->
+    <entity class="com.deptflow.domain.UserAccount" access="FIELD">
+        <table name="user_accounts">
+            <unique-constraint>
+                <column-name>username</column-name>
+            </unique-constraint>
+            <unique-constraint>
+                <column-name>email</column-name>
+            </unique-constraint>
+        </table>
+        <attributes>
+            <id name="id">
+                <column name="id" nullable="false"/>
+            </id>
+            <basic name="username">
+                <column name="username" nullable="false"/>
+            </basic>
+            <basic name="email">
+                <column name="email" nullable="false"/>
+            </basic>
+            <basic name="passwordHash">
+                <column name="password_hash" nullable="false"/>
+            </basic>
+            <basic name="active">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at" nullable="false"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
