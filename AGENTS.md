@@ -1,6 +1,6 @@
 # AGENTS.md - DeptFlow WebAPI
 
-This file provides guidance to AI agents when working with the **deptflow-spring-api** repository. (It mirrors `CLAUDE.md`.)
+This file provides guidance to AI agents when working with the **deptflow-spring-api** repository.
 
 ## Repository Overview
 
