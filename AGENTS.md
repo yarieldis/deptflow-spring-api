@@ -6,7 +6,7 @@ This file provides guidance to AI agents when working with the **deptflow-spring
 
 **Purpose**: Backend services for the **DeptFlow** department workflow application. It manages institutions, departments, the people working in them, and the (versioned) documents those people use, exposed as a multi-tenant REST API.
 
-**Status**: Java 25 + Spring Boot. All layers are complete (domain, persistence, application, REST API + JWT security, Flyway migrations, OpenAPI). Remaining: Testcontainers-based multi-DB integration tests (no Docker in this environment).
+**Status**: Java 25 + Spring Boot. All layers are complete and verified (domain, persistence, application, REST API + JWT security, Flyway migrations, OpenAPI, and multi-DB Testcontainers tests).
 
 **Technology Stack**:
 - Java 25 (LTS)
@@ -88,6 +88,8 @@ In development, Flyway applies automatically on application startup against the 
 ```bash
 ./mvnw clean install                      # build all modules
 ./mvnw -pl api spring-boot:run            # run the API (default SQLite, port 8080)
+docker-compose up --build                 # run app + PostgreSQL via Docker
+docker-compose -f docker-compose.sqlserver.yml up --build  # app + SQL Server
 ```
 
 The API runs at `http://localhost:8080` (HTTP). In development, the OpenAPI document is at `http://localhost:8080/v3/api-docs` and Swagger UI at `http://localhost:8080/swagger-ui.html`.

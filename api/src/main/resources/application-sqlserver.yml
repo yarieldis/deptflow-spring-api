@@ -4,6 +4,8 @@ spring:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
     password: YourStrong!Passw0rd
+    hikari:
+      maximum-pool-size: 10
   jpa:
     hibernate:
       ddl-auto: validate

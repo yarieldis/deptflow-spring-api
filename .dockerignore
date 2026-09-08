@@ -1,0 +1,17 @@
+target/
+.git/
+.gitignore
+.idea/
+*.iml
+.vscode/
+*.db
+*.db-shm
+*.db-wal
+storage/
+openspec/
+README.md
+AGENTS.md
+CLAUDE.md
+Dockerfile
+docker-compose*.yml
+.dockerignore

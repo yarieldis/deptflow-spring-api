@@ -37,6 +37,10 @@
         </dependency>
         <!-- Flyway for production databases (SQLite dev uses ddl-auto; Flyway OSS has no SQLite module) -->
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-flyway</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
