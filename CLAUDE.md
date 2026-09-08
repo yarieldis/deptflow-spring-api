@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (and other AI agents) when working wi
 
 **Purpose**: Backend services for the **DeptFlow** department workflow application. It manages institutions, departments, the people working in them, and the (versioned) documents those people use, exposed as a multi-tenant REST API.
 
-**Status**: Java 25 + Spring Boot. The domain, persistence, and application (use-case) layers are complete; the REST API and JWT security are in progress.
+**Status**: Java 25 + Spring Boot. Domain, persistence, application, and REST API/JWT security are complete; Flyway migrations and broader test coverage remain.
 
 **Technology Stack**:
 - Java 25 (LTS)

@@ -1,8 +1,10 @@
 package com.deptflow.infrastructure;
 
+import com.deptflow.application.ports.CurrentTenantProvider;
 import com.deptflow.application.ports.CurrentUserProvider;
 import com.deptflow.application.ports.StorageService;
 import com.deptflow.infrastructure.persistence.JpaPersistenceConfig;
+import com.deptflow.infrastructure.persistence.ThreadLocalCurrentTenantProvider;
 import com.deptflow.infrastructure.security.ThreadLocalCurrentUserProvider;
 import com.deptflow.infrastructure.storage.FileSystemStorageService;
 import org.springframework.context.annotation.Bean;
@@ -60,6 +62,11 @@ public class ApplicationTestConfig {
     @Bean
     PlatformTransactionManager transactionManager(jakarta.persistence.EntityManagerFactory emf) {
         return new JpaTransactionManager(emf);
+    }
+
+    @Bean
+    CurrentTenantProvider currentTenantProvider() {
+        return new ThreadLocalCurrentTenantProvider();
     }
 
     @Bean

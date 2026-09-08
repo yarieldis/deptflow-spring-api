@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: deptflow-api
+  datasource:
+    url: jdbc:sqlite:deptflow.db
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      maximum-pool-size: 1
+  jpa:
+    open-in-view: false
+    hibernate:
+      # Dev convenience until Flyway baseline migrations land (Phase 5).
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.community.dialect.SQLiteDialect
+
+deptflow:
+  storage:
+    root-path: ./storage
+  jwt:
+    # Dev-only secret (>= 32 bytes for HS256). Override in production.
+    secret: change-me-this-is-a-dev-only-secret-key-please-rotate-0123456789
+    expiration-minutes: 60
