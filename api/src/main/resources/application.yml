@@ -12,11 +12,14 @@ spring:
   jpa:
     open-in-view: false
     hibernate:
-      # Dev convenience until Flyway baseline migrations land (Phase 5).
+      # SQLite dev database. Flyway OSS has no SQLite module, so dev relies on
+      # Hibernate ddl-auto; Postgres/SQL Server use Flyway via profiles.
       ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.community.dialect.SQLiteDialect
+  flyway:
+    enabled: false
 
 deptflow:
   storage:

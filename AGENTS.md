@@ -6,7 +6,7 @@ This file provides guidance to AI agents when working with the **deptflow-spring
 
 **Purpose**: Backend services for the **DeptFlow** department workflow application. It manages institutions, departments, the people working in them, and the (versioned) documents those people use, exposed as a multi-tenant REST API.
 
-**Status**: Java 25 + Spring Boot. Domain, persistence, application, and REST API/JWT security are complete; Flyway migrations and broader test coverage remain.
+**Status**: Java 25 + Spring Boot. All layers are complete (domain, persistence, application, REST API + JWT security, Flyway migrations, OpenAPI). Remaining: Testcontainers-based multi-DB integration tests (no Docker in this environment).
 
 **Technology Stack**:
 - Java 25 (LTS)
