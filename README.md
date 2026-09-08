@@ -1,1 +1,33 @@
-Web API for the department workflow application, built with Spring Boot.
+# DeptFlow WebAPI
+
+Backend services for the **DeptFlow** department workflow application — institutions, departments, the people working in them, and the (versioned) documents those people use, exposed as a multi-tenant REST API.
+
+> **Status**: migrating from .NET 10 to **Java 25 + Spring Boot**. See `openspec/changes/migrate-to-spring-boot/` for the migration plan. The domain layer is complete; persistence, use cases, and the API are in progress.
+
+## Stack
+
+- Java 25 (LTS), Spring Boot 4.1.x (Spring Framework 7)
+- Spring MVC, Spring Security (JWT resource server)
+- Spring Data JPA / Hibernate 7, Flyway (SQLite / SQL Server / PostgreSQL)
+
+## Architecture
+
+```
+api  →  application  →  domain  ←  infrastructure
+```
+
+Maven modules enforce this rule: `domain` references nothing; `application` references `domain`; `infrastructure` references `domain` + `application`; `api` references `application` + `infrastructure`.
+
+## Quick start
+
+```bash
+./mvnw clean install              # build all modules
+./mvnw -pl api spring-boot:run    # run the API (default SQLite, port 8080)
+```
+
+- OpenAPI: `http://localhost:8080/v3/api-docs`
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+
+## Configuration
+
+See `application.yml` (profiles: `sqlite`, `sqlserver`, `postgres`) and `AGENTS.md` for details.
