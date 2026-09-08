@@ -1,0 +1,3 @@
+# Keep the Maven wrapper and shell scripts LF on all platforms (required for Linux CI).
+mvnw text eol=lf
+*.sh text eol=lf
