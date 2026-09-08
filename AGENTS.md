@@ -6,7 +6,7 @@ This file provides guidance to AI agents when working with the **deptflow-spring
 
 **Purpose**: Backend services for the **DeptFlow** department workflow application. It manages institutions, departments, the people working in them, and the (versioned) documents those people use, exposed as a multi-tenant REST API.
 
-**Status**: Migrating from .NET 10 to **Java 25 + Spring Boot**. The `migrate-to-spring-boot` OpenSpec change is the active change; the domain layer (Phase 1) is complete.
+**Status**: Java 25 + Spring Boot. The domain, persistence, and application (use-case) layers are complete; the REST API and JWT security are in progress.
 
 **Technology Stack**:
 - Java 25 (LTS)

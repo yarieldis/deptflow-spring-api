@@ -1,7 +1,6 @@
 package com.deptflow.domain;
 
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -25,10 +24,7 @@ final class DomainAssertions {
      * case-insensitive (SQL Server) and case-sensitive (PostgreSQL/SQLite) engines.
      */
     static String normalizeCode(String code) {
-        if (code == null || code.isBlank()) {
-            throw new DomainException("code is required");
-        }
-        return code.trim().toLowerCase(Locale.ROOT);
+        return Codes.normalize(code);
     }
 
     static UUID requireId(UUID id, String field) {

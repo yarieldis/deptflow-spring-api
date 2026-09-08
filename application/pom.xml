@@ -20,5 +20,20 @@
             <artifactId>deptflow-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- Spring stereotype + transaction annotations only (no Spring Data/JPA here) -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>
